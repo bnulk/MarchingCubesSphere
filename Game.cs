@@ -9,6 +9,9 @@ namespace MarchingCubesSphere
     // Game 类继承自 OpenTK 提供的 GameWindow，这是应用的主窗口类
     internal class Game : GameWindow
     {
+        // 顶部添加字段
+        private VoxelVolume voxelVolume;
+
         // 构造函数，创建窗口，设置尺寸和标题
         public Game()
             : base(GameWindowSettings.Default, new NativeWindowSettings()
@@ -28,6 +31,9 @@ namespace MarchingCubesSphere
 
             // 启用深度测试（用于 3D 物体前后遮挡）
             GL.Enable(EnableCap.DepthTest);
+
+            // 初始化体素网格，50³ 个体素，每个体素边长 0.1 单位
+            voxelVolume = new VoxelVolume(50, 50, 50, 0.1f);
         }
 
         // OnRenderFrame：每帧渲染调用一次
