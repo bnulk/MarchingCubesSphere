@@ -13,13 +13,16 @@ namespace MarchingCubesSphere
         private VoxelVolume voxelVolume;
 
         // 构造函数，创建窗口，设置尺寸和标题
-        public Game()
+        public Game() 
             : base(GameWindowSettings.Default, new NativeWindowSettings()
             {
                 ClientSize = new Vector2i(800, 600),              // 设置窗口大小：800x600 像素
-                Title = "Marching Cubes Sphere - Step 1"          // 设置窗口标题
+                Title = "Marching Cubes Sphere - Step 1"         // 设置窗口标题
             })
-        { }
+        {
+            // 初始化体素网格，50³ 个体素，每个体素边长 0.1 单位
+            voxelVolume = new VoxelVolume(50, 50, 50, 0.1f);
+        }
 
         // OnLoad：窗口加载时调用。用于初始化 OpenGL 设置
         protected override void OnLoad()
@@ -32,8 +35,6 @@ namespace MarchingCubesSphere
             // 启用深度测试（用于 3D 物体前后遮挡）
             GL.Enable(EnableCap.DepthTest);
 
-            // 初始化体素网格，50³ 个体素，每个体素边长 0.1 单位
-            voxelVolume = new VoxelVolume(50, 50, 50, 0.1f);
         }
 
         // OnRenderFrame：每帧渲染调用一次
